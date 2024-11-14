@@ -19,7 +19,7 @@ class Recipe
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column(type: Type::TEXT)]
+    #[ORM\Column(type: 'string')]
     private ?string $content = null;
 
     #[ORM\Column]
