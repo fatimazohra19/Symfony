@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Recipe;
+use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Entity;
@@ -31,6 +32,14 @@ return $this->redirectToRoute('recipe.show',['slug'=>$recipe->getSlug(),'id' =>$
         }
         return $this->render('recipe/show.html.twig',[
            'recipe' =>$recipe
+        ]);
+    }
+    #[Route('/recettes/{id}/edit',name:'recipe.edit')]
+    public function edit(Recipe $recipe){
+        $form=$this->createForm(RecipeType::class, $recipe);
+        return $this->render('recipe/edit.html.twig',[
+            'recipe' =>$recipe,
+            'form' =>$form
         ]);
     }
 }
