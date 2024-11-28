@@ -1,0 +1,11 @@
+<h1>Détails de la tâche</h1>
+
+<p>Date formatée : {{ format_date(task.dueDate, 'd/m/Y') }}</p>
+<p>Description : {{ task.description | truncate(8) }}</p>
+
+{% if task is high_priority %}
+    <p>Cette tâche est prioritaire !</p>
+{% else %}
+    <p>Cette tâche est normale.</p>
+{% endif %}
+

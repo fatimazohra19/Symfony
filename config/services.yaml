@@ -18,3 +18,7 @@ services:
 
     Dompdf\Options:  # Définir un service pour les options
         arguments: []  # Ajouter des options si nécessaire
+    # Extension Twig personnalisée
+    App\Twig\AppExtension:
+        tags: [ 'twig.extension' ]
+    
