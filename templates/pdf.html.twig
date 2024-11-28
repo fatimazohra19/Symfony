@@ -1,0 +1,36 @@
+<html>
+    <head>
+      <style>
+        /* Define the page number counter for content */
+        body {
+          counter-reset: page; /* Reset counter at the start */
+        }
+  
+        .page_number::before {
+          content: "Page " counter(page);
+        }
+  
+        /* Force page breaks after the first paragraph */
+        p {
+          page-break-after: always;
+        }
+  
+        /* Add styles to avoid page number being added to the first page */
+        .page_number {
+          display: block;
+          text-align: center;
+          margin-top: 20px;
+          font-size: 12px;
+        }
+  
+      </style>
+      <meta charset="UTF-8">
+    </head>
+    <body>
+      <div id="header"></div>
+      <p><span class="page_number"></span></p> <!-- Page number on the first page -->
+      <p style="page-break-before: always;"><span class="page_number"></span></p> <!-- Page number on the second page -->
+      <p>Hello world</p>
+    </body>
+  </html>
+  
