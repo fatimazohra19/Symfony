@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 class Recipe
 {
@@ -56,7 +58,6 @@ class Recipe
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
-
         return $this;
     }
 
@@ -107,4 +108,21 @@ class Recipe
 
         return $this;
     }
+
+    public function createSlug(string $title, SluggerInterface $slugger): string
+{
+    return $slugger->slug($title)->lower();
 }
+
+
+
+#[ORM\PrePersist]
+#[ORM\PreUpdate]
+public function updateSlug(): void
+{
+    if ($this->title) {
+        // Crée un slug à partir du titre
+        $this->slug = (new \Symfony\Component\String\Slugger\AsciiSlugger())->slug($this->title)->lower();
+    }
+
+}}
